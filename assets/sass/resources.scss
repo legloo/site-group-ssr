@@ -1,0 +1,4 @@
+$baseFontSize: 37.5;//开发设备下的跟字体
+@function px2rem($px){
+  @return $px/$baseFontSize * 1rem;
+}

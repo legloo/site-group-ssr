@@ -1,0 +1,27 @@
+{
+  "name": "cookbook",
+  "version": "1.0.0",
+  "description": "description of COOKBOOK",
+  "author": "yuhao_zhu@yeah.net",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cross-env": "^5.2.0",
+    "koa": "^2.6.2",
+    "nuxt": "^2.0.0",
+    "vant": "^2.5.7"
+  },
+  "devDependencies": {
+    "@nuxtjs/style-resources": "^1.0.0",
+    "node-sass": "^4.13.1",
+    "nodemon": "^1.18.9",
+    "nuxt-sass-resources-loader": "^2.0.5",
+    "sass-loader": "^8.0.2"
+  }
+}
