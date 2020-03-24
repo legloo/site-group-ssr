@@ -20,11 +20,13 @@
 
       <van-swipe class="banner" :autoplay="5000" indicator-color="#eee">
         <van-swipe-item v-for="(image, index) in images" :key="index">
-          <div class="banner-content">
-            <img :src="image.src" :alt="image.alt" />
-            <!-- <img v-lazy="image.src" :alt="image.alt" /> -->
-            <p class="title">{{image.title}}</p>
-          </div>
+          <nuxt-link :to="{path:`/detail?id=${image.title}`}">
+            <div class="banner-content">
+              <img :src="image.src" :alt="image.alt" />
+              <!-- <img v-lazy="image.src" :alt="image.alt" /> -->
+              <p class="title">{{image.title}}</p>
+            </div>
+          </nuxt-link>
         </van-swipe-item>
       </van-swipe>
       <van-tabs
@@ -57,6 +59,19 @@ export default {
   components: {
     homeList
   },
+  head: {
+    title: "cook-cookbook",
+    meta: [
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        hid: "description-home",
+        name: "description",
+        content: "description-home"
+      }
+    ],
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+  },
   async asyncData(context) {
     let [banner_data, tabs_data] = await Promise.all([
       axios.get("https://api.myjson.com/bins/147x54"),
@@ -71,7 +86,7 @@ export default {
   mounted() {},
   methods: {
     search() {
-      console.log(this.searchValue);
+      this.$router.push(`/search-result?wd=${this.searchValue}`);
     }
     // getl
   },
@@ -96,10 +111,11 @@ export default {
   .van-search {
     padding: 0;
     box-shadow: 0 0 15px 9px #a2a0a0;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
+    border-radius: 5px;
   }
   .main {
-    padding: 10px 13px 13px 13px;
+    padding: 4px 13px 13px 13px;
   }
   .van-nav-bar {
     background-color: #161515;
