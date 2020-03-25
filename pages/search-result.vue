@@ -37,18 +37,20 @@ export default {
   components: {
     searchList
   },
-  head: {
-    title: "search-cookbook",
-    meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      {
-        hid: "description-search",
-        name: "description",
-        content: "description-search"
-      }
-    ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+  head() {
+    return {
+      title: "search-cookbook",
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        {
+          hid: "description-search",
+          name: "description",
+          content: "description-search"
+        }
+      ],
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    };
   },
   created() {
     this.searchValue = this.$route.query.wd;
@@ -66,7 +68,7 @@ export default {
   data() {
     return {
       list: [],
-      searchShow: false,
+      searchShow: true,
       searchValue: "",
       keyword: ""
       // images:

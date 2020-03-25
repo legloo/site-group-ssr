@@ -59,18 +59,20 @@ export default {
   components: {
     homeList
   },
-  head: {
-    title: "cook-cookbook",
-    meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      {
-        hid: "description-home",
-        name: "description",
-        content: "description-home"
-      }
-    ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+  head() {
+    return {
+      title: "cook-cookbook",
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        {
+          hid: "description-home",
+          name: "description",
+          content: "description-home"
+        }
+      ],
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    };
   },
   async asyncData(context) {
     let [banner_data, tabs_data] = await Promise.all([
