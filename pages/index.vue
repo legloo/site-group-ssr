@@ -9,6 +9,7 @@
       <van-search
         v-show="searchShow"
         v-model="searchValue"
+        @keyup.13="search"
         left-icon
         placeholder="please input keywords"
         @search="search"
@@ -64,7 +65,6 @@ export default {
       title: "home-cookbook",
       meta: [
         { charset: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
         {
           hid: "description-home",
           name: "description",

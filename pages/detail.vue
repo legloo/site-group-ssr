@@ -9,6 +9,7 @@
       <van-search
         v-show="searchShow"
         v-model="searchValue"
+        @keyup.enter="search"
         left-icon
         placeholder="please input keywords"
         @search="search"
@@ -163,7 +164,7 @@ export default {
   .main {
     padding: 10px 20px 20px 20px;
     h6 {
-      font-size: px2rem(19);
+      font-size: 19px;
     }
     .title-bottom {
       font-size: 13px;
@@ -180,7 +181,7 @@ export default {
     }
     .content {
       line-height: 26px;
-      font-size: px2rem(16);
+      font-size: 16px;
       margin-top: 7px;
       color: #333;
       font-family: Open Sans,sans-serif;
@@ -207,6 +208,10 @@ export default {
     border: 1px solid #eee;
     color: #716f6f;
     border-radius: 5px;
+    button{
+      background-color: #fff;
+    border: none;
+    }
 }
     }
   }

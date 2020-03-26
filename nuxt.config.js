@@ -8,8 +8,8 @@ module.exports = {
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'pple-mobile-web-app-capable-viewport', name: 'viewport', content: 'width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no' },
+      { hid: 'pple-mobile-web-app-capable', name: 'pple-mobile-web-app-capable',content:"yes" },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -22,7 +22,7 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['~assets/css/reset.css'],
+  css: [],
   /*
   ** Plugins to load before mounting the App
   */
