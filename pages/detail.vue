@@ -53,6 +53,15 @@
           </span>
           </a>
         </div>
+        <div class="prev_next">
+        <nuxt-link :to="{path:`/detail?id=1`}" class="prev">
+        <button>Prev</button>
+        </nuxt-link>
+          <nuxt-link :to="{path:`/detail?id=2`}" class="next">
+        <button>next</button>
+          </nuxt-link>
+        </div>
+        <detailList :type="article.type" />
     </div>
     <!-- <nuxt-link to="/about">关于</nuxt-link> -->
   </div>
@@ -65,9 +74,14 @@ import { Lazyload } from "vant";
 
 import axios from "axios";
 
+import detailList from "~/components/detail-list.vue";
+
 Vue.use(Lazyload);
 
 export default {
+  components: {
+    detailList
+  },
   head() {
     return {
       title: this.article.title,
@@ -181,6 +195,19 @@ export default {
     span{
       margin:0 4px
     }
+    }
+    .prev_next{
+          display: flex;
+    font-size: 23px;
+    justify-content: space-between;
+    padding: 23px;
+      a{
+       flex: 0 0 34%;
+    text-align: center;
+    border: 1px solid #eee;
+    color: #716f6f;
+    border-radius: 5px;
+}
     }
   }
   .van-nav-bar {
