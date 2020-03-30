@@ -17,7 +17,7 @@
           <van-icon name="search" @click="search" />
         </template>
       </van-search>
-      <searchList :keywords="keyword" />
+      <searchList :date="date" :source="source" :keywords="keyword" />
     </div>
     <!-- <nuxt-link to="/about">关于</nuxt-link> -->
   </div>
@@ -53,6 +53,8 @@ export default {
   },
   created() {
     this.searchValue = this.$route.query.wd;
+    this.date = this.$route.query.date;
+    this.source = this.$route.query.source;
     this.keyword = this.searchValue;
   },
   mounted() {},
@@ -69,7 +71,9 @@ export default {
       list: [],
       searchShow: true,
       searchValue: "",
-      keyword: ""
+      keyword: "",
+      date: "",
+      source: ""
       // images:
     };
   }

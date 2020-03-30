@@ -21,9 +21,9 @@
 
       <van-swipe class="banner" :autoplay="5000" indicator-color="#eee">
         <van-swipe-item v-for="(image, index) in images" :key="index">
-          <nuxt-link :to="{path:`/detail?id=${image.title}`}">
+          <nuxt-link :to="{path:`/detail?id=${image.articleId}`}">
             <div class="banner-content">
-              <img :src="image.src" :alt="image.alt" />
+              <img :src="image.headImgUrl" :alt="image.headImgDesc" />
               <!-- <img v-lazy="image.src" :alt="image.alt" /> -->
               <p class="title">{{image.title}}</p>
             </div>
@@ -37,12 +37,11 @@
         :line-height="'1px'"
         :ellipsis="false"
       >
-        <van-tab v-for="(item) in tabs" :key="item.name" :title="item.title" :name="item.name">
-          <homeList :tabtype="item.name" />
+        <van-tab v-for="(item) in tabs" :key="'tabs'+item.id" :title="item.name" :name="item.name">
+          <homeList :tabtype="item.id" />
         </van-tab>
       </van-tabs>
     </div>
-    <!-- <nuxt-link to="/about">关于</nuxt-link> -->
   </div>
 </template>
 
@@ -76,17 +75,24 @@ export default {
   },
   async asyncData(context) {
     let [banner_data, tabs_data] = await Promise.all([
-      axios.get("https://api.myjson.com/bins/147x54"),
-      axios.get("https://api.myjson.com/bins/1bu9oo")
+      axios.get("/apis/api/article/front/recommend"),
+      axios.get("/apis/api/articleType/dict")
     ]);
+    console.log(tabs_data.data);
     return {
-      images: banner_data.data,
+      images: banner_data.data.data,
       tabs: tabs_data.data.data,
-      activeName: tabs_data.data.data[3].name
+      activeName: tabs_data.data.data[0].name
     };
   },
-  mounted() {},
+   mounted() {
+   this.getlist()
+ },
   methods: {
+    async getlist(){
+    let res = await  this.$axios.get("/api/article/front/recommend")
+      
+    },
     search() {
       this.$router.push(`/search-result?wd=${this.searchValue}`);
     }

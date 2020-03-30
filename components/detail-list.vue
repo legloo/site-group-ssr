@@ -71,6 +71,7 @@ export default {
   margin-bottom: 22px;
   .card-image {
     height: 200px;
+    font-size: 12px;
     img {
       height: 100%;
       width: 100%;

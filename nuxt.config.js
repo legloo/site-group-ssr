@@ -9,7 +9,7 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { hid: 'pple-mobile-web-app-capable-viewport', name: 'viewport', content: 'width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no' },
-      { hid: 'pple-mobile-web-app-capable', name: 'pple-mobile-web-app-capable',content:"yes" },
+      { hid: 'pple-mobile-web-app-capable', name: 'pple-mobile-web-app-capable', content: "yes" },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -38,7 +38,9 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    'nuxt-sass-resources-loader'
+    'nuxt-sass-resources-loader',
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy',
   ],
 
   sassResources: ['~assets/sass/resources.scss'],
@@ -51,5 +53,21 @@ module.exports = {
     */
     extend(config, ctx) {
     }
-  }
+  },
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
+    proxy: true, // 表示开启代理
+    prefix: '/apis', // 表示给请求url加个前缀 /api
+    credentials: true // 表示跨域请求时是否需要使用凭证
+  },
+  proxy: {
+    '/apis': {
+      target: 'http://3027nq6031.qicp.vip', // 目标接口域名
+      changeOrigin: true, // 表示是否跨域
+      pathRewrite: {
+        '^/apis': '', // 把 /api 替换成‘’
+      }
+    }
+  },
+  watchQuery: true
 }
