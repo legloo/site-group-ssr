@@ -1,25 +1,22 @@
 <template>
   <div class="container">
-    <van-nav-bar title="COOKBOOK" left-arrow @click-left="onClickLeft">
+    <van-nav-bar title="COOKBOOK" left-arrow @click-left="onClickLeft"  :fixed="true">
       <template #right>
         <van-icon name="search" @click="searchShow = !searchShow" />
       </template>
     </van-nav-bar>
-    <div class="main">
-      <van-search
-        v-show="searchShow"
-        v-model="searchValue"
-        left-icon
-        placeholder="please input keywords"
-        @search="search"
-      >
-        <!-- <template #action>
-          <van-icon name="search" @click="search" />
-        </template> -->
-        <template slot="right-icon">
-          <van-icon name="search" @click="search" />
-        </template>
-      </van-search>
+     <van-search
+      v-show="searchShow"
+      v-model="searchValue"
+      placeholder="please input keywords"
+      left-icon
+      @search="search"
+    >
+      <template slot="right-icon">
+        <van-icon name="search" @click="search" />
+      </template>
+    </van-search>
+    <div class="main" :class="{'main-searchShow':searchShow}">
       <searchList :date="date" :source="source" :keywords="keyword" />
     </div>
     <!-- <nuxt-link to="/about">关于</nuxt-link> -->
@@ -91,13 +88,25 @@ export default {
   max-width: 500px;
   margin: auto;
   .van-search {
-    padding: 0;
-    box-shadow: 0 0 15px 9px #a2a0a0;
+    padding: 0 13px;
+    background-color: transparent;
     margin-bottom: 12px;
     border-radius: 5px;
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    z-index: 10;
+    .van-search__content {
+      background-color: #f5f8ff;
+      box-shadow: 0 0 5px 3px #a2a0a0;
+    }
   }
   .main {
+    margin-top: 46px;
     padding: 4px 13px 13px 13px;
+  }
+  .main-searchShow {
+    margin-top: 88px;
   }
   .van-nav-bar {
     background-color: #161515;

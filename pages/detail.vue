@@ -1,26 +1,23 @@
 <template>
   <div class="container">
-    <van-nav-bar title="COOKBOOK" left-arrow @click-left="onClickLeft">
+    <van-nav-bar title="COOKBOOK" left-arrow @click-left="onClickLeft" :fixed="true">
       <template #right>
         <van-icon name="search" @click="searchShow = !searchShow" />
       </template>
     </van-nav-bar>
-    <div class="main">
-      <van-search
-        v-show="searchShow"
-        v-model="searchValue"
-        @keyup.enter="search"
-        left-icon
-        placeholder="please input keywords"
-        @search="search"
-      >
-        <!-- <template #action>
-          <van-icon name="search" @click="search" />
-        </template>-->
-        <template slot="right-icon">
-          <van-icon name="search" @click="search" />
-        </template>
-      </van-search>
+    <van-search
+      v-show="searchShow"
+      v-model="searchValue"
+      @keyup.enter="search"
+      left-icon
+      placeholder="please input keywords"
+      @search="search"
+    >
+      <template slot="right-icon">
+        <van-icon name="search" @click="search" />
+      </template>
+    </van-search>
+    <div class="main" :class="{'main-searchShow':searchShow}">
       <h1>{{article.title}}</h1>
       <div class="title-bottom">
         <nuxt-link :to="{path:`/search-result?date=${article.gmtCreated}`}">
@@ -234,19 +231,21 @@ export default {
   },
   created() {},
   mounted() {
+    this.locationu = window.location.href;
     document.getElementsByClassName("container")[0].scrollTop = 0;
   },
   methods: {
     getShareHref(item) {
+      console.log(this.locationu);
       let content = "";
       if (item === "facebook") {
-        content += `https://www.baidu.com?utm_source=facebook&utm_medium=organic&utm_campaign=share`;
+        content += `${this.locationu}&utm_source=facebook&utm_medium=organic&utm_campaign=share`;
         return `https://www.facebook.com/sharer.php?title=${
           this.article.title
         }&u=${encodeURIComponent(content)}`;
       }
       if (item === "twitter") {
-        content += `https://www.baidu.com?utm_source=twitter&utm_medium=organic&utm_campaign=share`;
+        content += `${this.locationu}&utm_source=twitter&utm_medium=organic&utm_campaign=share`;
         return `https://twitter.com/share?text=${
           this.article.title
         }&url=${encodeURIComponent(content)}`;
@@ -255,13 +254,13 @@ export default {
         content += this.article.title;
         content +=
           "\n\n" +
-          "https://www.baidu.com" +
-          "?utm_source=whatsapp&utm_medium=organic&utm_campaign=share";
+          `${this.locationu}&` +
+          "utm_source=whatsapp&utm_medium=organic&utm_campaign=share";
         return "whatsapp://send?text=" + encodeURIComponent(content);
       }
       if (item === "line") {
         return `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(
-          "https://www.baidu.com"
+          this.locationu
         )}`;
       }
     },
@@ -277,7 +276,8 @@ export default {
       searchShow: false,
       searchValue: "",
       shareBtns: ["facebook", "twitter", "line", ""],
-      svg: ""
+      svg: "",
+      locationu: ""
     };
   }
 };
@@ -300,6 +300,24 @@ export default {
   width: 100%;
   margin: 10px 0;
 }
+.content pre {
+  background-color: #2f2d2d;
+  color: #adadad;
+  padding: 10px;
+  overflow-x: scroll;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+.content code {
+  background-color: #2f2d2d;
+  color: #adadad;
+  word-break: break-all;
+  display: block;
+  margin: 10px 0;
+}
+.content p {
+  word-break: break-all;
+}
 </style>
 
 <style lang="scss" scoped>
@@ -308,12 +326,24 @@ export default {
   max-width: 500px;
   margin: auto;
   .van-search {
-    padding: 0;
-    box-shadow: 0 0 15px 9px #a2a0a0;
+    padding: 0 13px;
+    background-color: transparent;
     margin-bottom: 12px;
     border-radius: 5px;
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    z-index: 10;
+    .van-search__content {
+      background-color: #f5f8ff;
+      box-shadow: 0 0 5px 3px #a2a0a0;
+    }
+  }
+  .main-searchShow {
+    margin-top: 88px !important;
   }
   .main {
+    margin-top: 46px;
     padding: 4px 24px 10px 24px;
     h1 {
       font-family: sofia-pro, sans-serif;
@@ -420,13 +450,10 @@ export default {
   box-shadow: 0px 2px 15px -9px #7b7979;
   margin-bottom: 22px;
   overflow: hidden;
-  .card-image {
+  img {
     font-size: 12px;
-    height: 200px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
+    width: 100%;
+    display: block;
   }
   .card-content {
     border-top: 1px solid #eee;

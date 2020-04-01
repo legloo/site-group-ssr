@@ -82,13 +82,10 @@ export default {
   box-shadow: 0px 2px 15px -9px #7b7979;
   margin-bottom: 22px;
   overflow: hidden;
-  .card-image {
-    font-size: 12px;
-    height: 200px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
+  img {
+     font-size: 12px;
+    width: 100%;
+    display: block;
   }
   .card-content {
     border-top: 1px solid #eee;

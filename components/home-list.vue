@@ -8,9 +8,7 @@
   >
     <nuxt-link v-for="(item,key) in list" :key="key" :to="{path:`/detail?id=${item.articleId}`}">
       <div class="card-item">
-        <div class="card-image">
-          <img :src="item.headImgUrl" :alt="item.headImgDesc" />
-        </div>
+        <img :src="item.headImgUrl" :alt="item.headImgDesc" />
         <div class="card-content">
           <h2>{{item.title}}</h2>
           <p class="card-content-footer">
@@ -69,13 +67,10 @@ export default {
   box-shadow: 0px 2px 15px -9px #7b7979;
   margin-bottom: 22px;
   overflow: hidden;
-  .card-image {
+  img {
     font-size: 12px;
-    height: 200px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
+    width: 100%;
+    display: block;
   }
   .card-content {
     border-top: 1px solid #eee;
