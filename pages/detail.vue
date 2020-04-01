@@ -27,9 +27,9 @@
           <span class="source">{{article.source}}</span>
         </nuxt-link>
       </div>
-      <div class="head-img">
+      <!-- <div class="head-img">
         <img :src="article.headImgUrl" :alt="article.headImgDesc" />
-      </div>
+      </div> -->
       <div class="content" v-html="article.content"></div>
 
       <div class="share">
@@ -369,13 +369,13 @@ export default {
         transition: 1s;
       }
     }
-    .head-img {
-      img {
-        width: 100%;
-        border: 1px solid #eee;
-        border-radius: 5px;
-      }
-    }
+    // .head-img {
+    //   img {
+    //     width: 100%;
+    //     border: 1px solid #eee;
+    //     border-radius: 5px;
+    //   }
+    // }
     .content {
       // line-height: 26px;
       // font-size: 16px;
