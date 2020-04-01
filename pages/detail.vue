@@ -14,11 +14,14 @@
         placeholder="please input keywords"
         @search="search"
       >
-        <template #action>
+        <!-- <template #action>
+          <van-icon name="search" @click="search" />
+        </template>-->
+        <template slot="right-icon">
           <van-icon name="search" @click="search" />
         </template>
       </van-search>
-      <h6>{{article.title}}</h6>
+      <h1>{{article.title}}</h1>
       <div class="title-bottom">
         <nuxt-link :to="{path:`/search-result?date=${article.gmtCreated}`}">
           <span class="time">{{article.gmtCreated}}</span>
@@ -141,22 +144,23 @@
         </a>
       </div>
       <div class="midNav">
-        <div class="pre-container">
+        <div class="pre-container" :class="{'nopreornext':!neighbor_pre}">
           <nuxt-link
             v-if="neighbor_pre"
             :to="{path:`/detail?id=${neighbor_pre.articleId}`}"
             class="prev"
           >
-            <button>Prev</button>
+            <van-icon name="arrow-left" @click="search" />Prev
           </nuxt-link>
         </div>
-        <div class="next-container">
+        <div class="next-container" :class="{'nopreornext':!neighbor_next}">
           <nuxt-link
             v-if="neighbor_next"
             :to="{path:`/detail?id=${neighbor_next.articleId}`}"
             class="next"
           >
-            <button>next</button>
+            Next
+            <van-icon name="arrow" @click="search" />
           </nuxt-link>
         </div>
       </div>
@@ -170,7 +174,7 @@
             <img :src="item.headImgUrl" :alt="item.headImgDesc" />
           </div>
           <div class="card-content">
-            <h4>{{item.title}}</h4>
+            <h2>{{item.title}}</h2>
             <p class="card-content-footer">
               <span>{{item.gmtCreated}}</span>
               <span>{{item.source}}</span>
@@ -200,7 +204,7 @@ export default {
         {
           hid: "keywords-article",
           name: "keywords",
-          content: this.article.keywords ? this.article.keywords.join(","):''
+          content: this.article.keywords ? this.article.keywords.join(",") : ""
         },
         {
           hid: "description-article",
@@ -230,7 +234,7 @@ export default {
   },
   created() {},
   mounted() {
-    document.getElementsByClassName('container')[0].scrollTop = 0
+    document.getElementsByClassName("container")[0].scrollTop = 0;
   },
   methods: {
     getShareHref(item) {
@@ -279,6 +283,24 @@ export default {
 };
 </script>
 
+<style>
+.content {
+  font-family: sofia-pro, sans-serif;
+  font-size: 20px;
+  line-height: 27px;
+  letter-spacing: -0.5px;
+  color: #666;
+  margin-bottom: 0;
+  text-shadow: none;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 10px;
+}
+.content img {
+  width: 100%;
+  margin: 10px 0;
+}
+</style>
 
 <style lang="scss" scoped>
 @import "~assets/sass/resources.scss";
@@ -292,15 +314,30 @@ export default {
     border-radius: 5px;
   }
   .main {
-    padding: 10px 20px 20px 20px;
-    h6 {
-      font-size: 19px;
+    padding: 4px 24px 10px 24px;
+    h1 {
+      font-family: sofia-pro, sans-serif;
+      font-size: 38px;
+      line-height: 42px;
+      margin: 0;
+      padding: 0;
+      font-weight: 600;
+      letter-spacing: -1.5px;
+      color: #222;
     }
     .title-bottom {
-      font-size: 13px;
       padding: 17px 0;
       display: flex;
       justify-content: space-between;
+      a {
+        font-size: 12px;
+        letter-spacing: 0;
+        color: #999;
+        background-color: #eee;
+        padding: 3px 6px 3px 6px;
+        border-radius: 9999px;
+        transition: 1s;
+      }
     }
     .head-img {
       img {
@@ -310,13 +347,13 @@ export default {
       }
     }
     .content {
-      line-height: 26px;
-      font-size: 16px;
-      margin-top: 7px;
-      color: #333;
-      font-family: Open Sans, sans-serif;
-      text-align: left;
-      letter-spacing: 0.3px;
+      // line-height: 26px;
+      // font-size: 16px;
+      // margin-top: 7px;
+      // color: #333;
+      // font-family: Open Sans, sans-serif;
+      // text-align: left;
+      // letter-spacing: 0.3px;
     }
     .share {
       display: flex;
@@ -330,25 +367,33 @@ export default {
     .midNav {
       display: flex;
       font-size: 23px;
-      padding: 23px;
-      .pre-container,
-      .next-container {
-        flex: 0 0 50%;
-      }
+      padding: 23px 0;
+      justify-content: space-between;
       .pre-container {
+        flex: 0 0 30%;
         text-align: left;
+        background-color: #a3a3a3;
+        border-radius: 5px;
+        overflow: hidden;
       }
       .next-container {
+        flex: 0 0 60%;
         text-align: right;
+        background-color: #c83221;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .nopreornext {
+        background-color: #fff;
       }
       a {
         text-align: center;
-        color: #716f6f;
-        button {
-          border: 1px solid #eee;
-          background-color: #fff;
-          border-radius: 5px;
-        }
+        color: #ffffff;
+        line-height: 56px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: unset;
       }
     }
   }
@@ -374,27 +419,36 @@ export default {
   border-radius: 5px;
   box-shadow: 0px 2px 15px -9px #7b7979;
   margin-bottom: 22px;
+  overflow: hidden;
   .card-image {
-    height: 200px;
     font-size: 12px;
+    height: 200px;
     img {
-      height: 100%;
       width: 100%;
+      height: 100%;
     }
   }
   .card-content {
     border-top: 1px solid #eee;
     padding: 10px;
-    h4 {
-      color: #000;
-      font-size: 17px;
+    h2 {
+      font-size: 18px;
+      color: #444;
+      font-weight: 600;
+      font-family: sofia-pro, sans-serif;
     }
     .card-content-footer {
       display: flex;
       font-size: 12px;
-      color: #696767;
       justify-content: space-between;
       margin-top: 11px;
+      span {
+        color: #aaa;
+        background-color: #f5f5f5;
+        border: 1px solid #f5f5f5;
+        padding: 2px 5px 3px 5px;
+        border-radius: 4px;
+      }
     }
   }
 }

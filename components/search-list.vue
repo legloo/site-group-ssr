@@ -12,7 +12,7 @@
           <img :src="item.headImgUrl" :alt="item.headImgDesc" />
         </div>
         <div class="card-content">
-          <h4>{{item.title}}</h4>
+          <h2>{{item.title}}</h2>
           <p class="card-content-footer">
             <span>{{item.gmtCreated}}</span>
             <span>{{item.source}}</span>
@@ -81,27 +81,36 @@ export default {
   border-radius: 5px;
   box-shadow: 0px 2px 15px -9px #7b7979;
   margin-bottom: 22px;
+  overflow: hidden;
   .card-image {
-    height: 200px;
     font-size: 12px;
+    height: 200px;
     img {
-      height: 100%;
       width: 100%;
+      height: 100%;
     }
   }
   .card-content {
     border-top: 1px solid #eee;
     padding: 10px;
-    h4 {
-      color: #000;
-      font-size: 17px;
+    h2 {
+      font-size: 18px;
+      color: #444;
+      font-weight: 600;
+      font-family: sofia-pro, sans-serif;
     }
     .card-content-footer {
       display: flex;
       font-size: 12px;
-      color: #696767;
       justify-content: space-between;
       margin-top: 11px;
+      span {
+        color: #aaa;
+        background-color: #f5f5f5;
+        border: 1px solid #f5f5f5;
+        padding: 2px 5px 3px 5px;
+        border-radius: 4px;
+      }
     }
   }
 }

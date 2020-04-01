@@ -13,7 +13,10 @@
         placeholder="please input keywords"
         @search="search"
       >
-        <template #action>
+        <!-- <template #action>
+          <van-icon name="search" @click="search" />
+        </template> -->
+        <template slot="right-icon">
           <van-icon name="search" @click="search" />
         </template>
       </van-search>

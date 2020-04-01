@@ -2,3 +2,16 @@ $baseFontSize: 37.5;//开发设备下的跟字体
 @function px2rem($px){
   @return $px/$baseFontSize * 1rem;
 }
+
+
+@import url("https://p.typekit.net/p.css?s=1&k=rzi2qbb&ht=tk&f=24547.24548.24549&a=34816632&app=typekit&e=css"); @font-face {
+  font-family: "sofia-pro";
+  src: url("https://use.typekit.net/af/5855b2/00000000000000003b9b1a98/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/5855b2/00000000000000003b9b1a98/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/5855b2/00000000000000003b9b1a98/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+  font-display:auto;font-style: normal;
+  font-weight: 400;
+}
+
+
+h1,h2,p,a{
+  font-family: "sofia-pro",sans-serif;
+}

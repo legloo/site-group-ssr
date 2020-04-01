@@ -9,12 +9,14 @@
       <van-search
         v-show="searchShow"
         v-model="searchValue"
-        @keyup.13="search"
-        left-icon
         placeholder="please input keywords"
+        left-icon
         @search="search"
       >
-        <template #action>
+        <!-- <template #action>
+          <van-icon name="search" @click="search" />
+        </template> -->
+        <template slot="right-icon">
           <van-icon name="search" @click="search" />
         </template>
       </van-search>
@@ -78,7 +80,6 @@ export default {
       axios.get("/apis/api/article/front/recommend"),
       axios.get("/apis/api/articleType/dict")
     ]);
-    console.log(tabs_data.data);
     return {
       images: banner_data.data.data,
       tabs: tabs_data.data.data,

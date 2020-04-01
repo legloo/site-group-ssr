@@ -48,7 +48,6 @@ export default {
       this.getList();
     },
     async getList() {
-      console.log(this.type);
       this.loading = true;
       let res = await Axios.get("https://api.myjson.com/bins/9v108");
       this.list = this.list.concat(res.data);
