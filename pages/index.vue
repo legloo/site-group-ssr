@@ -128,7 +128,7 @@ export default {
   }
   .main {
     margin-top: 46px;
-    padding: 4px 13px 13px 13px;
+    padding: 10px 13px 13px 13px;
   }
   .main-searchShow {
     margin-top: 88px;
@@ -176,7 +176,6 @@ export default {
     }
   }
   .van-tabs {
-    margin-top: 20px;
     /deep/ .van-tabs__line {
       bottom: 21px;
       z-index: 0;
