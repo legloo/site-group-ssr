@@ -121,6 +121,7 @@ export default {
     top: 50px;
     width: 100%;
     z-index: 10;
+    max-width: 500px;
     .van-search__content {
       background-color: #f5f8ff;
       box-shadow: 0 0 5px 3px #a2a0a0;
@@ -132,6 +133,10 @@ export default {
   }
   .main-searchShow {
     margin-top: 88px;
+  }
+  .van-nav-bar--fixed{
+    max-width: 500px;
+    left: unset;
   }
   .van-nav-bar {
     background-color: #161515;

@@ -18,7 +18,7 @@
       </template>
     </van-search>
     <div class="main" :class="{'main-searchShow':searchShow}">
-      <h1>{{article.title}}</h1>
+      <h1 class="title">{{article.title}}</h1>
       <div class="title-bottom">
         <nuxt-link :to="{path:`/search-result?date=${article.gmtCreated}`}">
           <span class="time">{{article.gmtCreated}}</span>
@@ -332,6 +332,7 @@ export default {
     top: 50px;
     width: 100%;
     z-index: 10;
+    max-width: 500px;
     .van-search__content {
       background-color: #f5f8ff;
       box-shadow: 0 0 5px 3px #a2a0a0;
@@ -347,10 +348,10 @@ export default {
     }
     margin-top: 46px;
     padding: 4px 24px 10px 24px;
-    h1 {
+    .title {
       font-family: sofia-pro, sans-serif;
-      font-size: 38px;
-      line-height: 42px;
+      font-size: 32px;
+      line-height: 46px;
       margin: 0;
       padding: 0;
       font-weight: 600;
@@ -428,6 +429,11 @@ export default {
         border: unset;
       }
     }
+  }
+
+  .van-nav-bar--fixed{
+    max-width: 500px;
+    left: unset;
   }
   .van-nav-bar {
     background-color: #161515;
