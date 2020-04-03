@@ -285,7 +285,7 @@ export default {
 .content {
   font-family: sofia-pro, sans-serif;
   font-size: 19px;
-  line-height: 27px;
+  /* line-height: 27px; */
   letter-spacing: -0.5px;
   color: #666;
   margin-bottom: 0;
@@ -431,7 +431,7 @@ export default {
     }
   }
 
-  .van-nav-bar--fixed{
+  .van-nav-bar--fixed {
     max-width: 500px;
     left: unset;
   }
