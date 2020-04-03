@@ -19,7 +19,7 @@
     <div class="main" :class="{'main-searchShow':searchShow}">
       <van-swipe class="banner" :autoplay="5000" indicator-color="#eee">
         <van-swipe-item v-for="(image, index) in images" :key="index">
-          <nuxt-link :to="{path:`/detail?id=${image.articleId}`}">
+          <nuxt-link :to="{path:`/article/${image.articleId}`}">
             <div class="banner-content">
               <img :src="image.headImgUrl" :alt="image.headImgDesc" />
               <!-- <img v-lazy="image.src" :alt="image.alt" /> -->

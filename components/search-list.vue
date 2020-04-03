@@ -6,7 +6,7 @@
     finished-text="No more"
     @load="onLoad"
   >
-    <nuxt-link v-for="(item,key) in list" :key="key" :to="{path:`/detail?id=${item.articleId}`}">
+    <nuxt-link v-for="(item,key) in list" :key="key" :to="{path:`/article/${item.articleId}`}">
       <div class="card-item">
         <div class="card-image">
           <img :src="item.headImgUrl" :alt="item.headImgDesc" />

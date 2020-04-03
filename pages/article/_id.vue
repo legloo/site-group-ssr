@@ -29,7 +29,7 @@
       </div>
       <!-- <div class="head-img">
         <img :src="article.headImgUrl" :alt="article.headImgDesc" />
-      </div> -->
+      </div>-->
       <div class="content" v-html="article.content"></div>
 
       <div class="share">
@@ -144,7 +144,7 @@
         <div class="pre-container" :class="{'nopreornext':!neighbor_pre}">
           <nuxt-link
             v-if="neighbor_pre"
-            :to="{path:`/detail?id=${neighbor_pre.articleId}`}"
+            :to="{path:`/article/${neighbor_pre.articleId}`}"
             class="prev"
           >
             <van-icon name="arrow-left" @click="search" />Prev
@@ -153,7 +153,7 @@
         <div class="next-container" :class="{'nopreornext':!neighbor_next}">
           <nuxt-link
             v-if="neighbor_next"
-            :to="{path:`/detail?id=${neighbor_next.articleId}`}"
+            :to="{path:`/article/${neighbor_next.articleId}`}"
             class="next"
           >
             Next
@@ -161,10 +161,13 @@
           </nuxt-link>
         </div>
       </div>
+      <div class="advertisement_container">
+        <h2>You May Also Like</h2>
+      </div>
       <nuxt-link
         v-for="(item,key) in relatelist"
         :key="key"
-        :to="{path:`/detail?id=${item.articleId}`}"
+        :to="{path:`/article/${item.articleId}`}"
       >
         <div class="card-item">
           <div class="card-image">
@@ -211,11 +214,11 @@ export default {
       ]
     };
   },
-  async asyncData({ query }) {
+  async asyncData({ query, params }) {
     let [article, neighbor, relate] = await Promise.all([
-      axios.get(`/apis/api/article/front/detail/${query.id}`),
-      axios.get(`/apis/api/article/front/adjacent/${query.id}`),
-      axios.get(`/apis/api/article/front/related/${query.id}`)
+      axios.get(`/apis/api/article/front/detail/${params.id}`),
+      axios.get(`/apis/api/article/front/adjacent/${params.id}`),
+      axios.get(`/apis/api/article/front/related/${params.id}`)
     ]);
     return {
       article: article.data.data,
@@ -224,11 +227,7 @@ export default {
       relatelist: relate.data.data
     };
   },
-  watch: {
-    "$route.query.id"(val) {
-      window.location.reload();
-    }
-  },
+  watch: {},
   created() {},
   mounted() {
     this.locationu = window.location.href;
@@ -236,7 +235,6 @@ export default {
   },
   methods: {
     getShareHref(item) {
-      console.log(this.locationu);
       let content = "";
       if (item === "facebook") {
         content += `${this.locationu}&utm_source=facebook&utm_medium=organic&utm_campaign=share`;
@@ -286,7 +284,7 @@ export default {
 <style>
 .content {
   font-family: sofia-pro, sans-serif;
-  font-size: 20px;
+  font-size: 19px;
   line-height: 27px;
   letter-spacing: -0.5px;
   color: #666;
@@ -343,6 +341,10 @@ export default {
     margin-top: 88px !important;
   }
   .main {
+    .advertisement_container {
+      font-size: 15px;
+      margin: 17px 0;
+    }
     margin-top: 46px;
     padding: 4px 24px 10px 24px;
     h1 {
