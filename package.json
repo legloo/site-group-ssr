@@ -11,7 +11,9 @@
     "start-server": "nuxt start",
     "stop": "nuxt stop",
     "generate": "nuxt generate",
-    "deploy": "scp -r  ./static/ ./.nuxt/ ./nuxt.config.js ./package.json root@47.99.242.104:/usr/local/software/nuxt"
+    "deploy": "scp -r  ./static/ ./.nuxt/ ./nuxt.config.js ./package.json root@47.99.242.104:/usr/local/software/nuxt",
+    "deploy-prod": "scp -P 22 -r  ./static/ ./.nuxt/ ./nuxt.config.js ./package.json root@161.117.176.88:/usr/local/software/nuxt/ssr"
+    
   },
   "dependencies": {
     "axios": "^0.19.2",

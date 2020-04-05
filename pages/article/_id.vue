@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <van-nav-bar title="COOKBOOK" left-arrow @click-left="onClickLeft" :fixed="true">
+    <van-nav-bar title="天天头条" left-arrow @click-left="onClickLeft" :fixed="true">
       <template #right>
         <van-icon name="search" @click="searchShow = !searchShow" />
       </template>
@@ -282,6 +282,9 @@ export default {
 </script>
 
 <style>
+.van-nav-bar__title{
+  color: #999;
+}
 .content {
   font-family: sofia-pro, sans-serif;
   font-size: 19px;

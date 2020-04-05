@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <van-nav-bar title="COOKBOOK" left-arrow @click-left="onClickLeft"  :fixed="true">
+    <van-nav-bar title="天天头条" left-arrow @click-left="onClickLeft"  :fixed="true">
       <template #right>
         <van-icon name="search" @click="searchShow = !searchShow" />
       </template>
@@ -39,13 +39,20 @@ export default {
   },
   head() {
     return {
-      title: "search-cookbook",
+      title: "天天头条，更快看到每日头条新闻资讯",
       meta: [
         { charset: "utf-8" },
+         {
+          hid: "keywords-search",
+          name: "keywords",
+          content:
+            "每日头条新闻,阅读,资讯,热点,头条,社会,娱乐,游戏,财经,军事,科技,健康,历史，综艺，星座，动漫，漫画，搞笑，情感，养生，时尚，体育，国际"
+        },
         {
           hid: "description-search",
           name: "description",
-          content: "description-search"
+          content:
+            "天天头条是一个面向全球中文用户的资讯分享网站，每日热点新闻，网罗了国内外热点头条、明星八卦、精彩综艺、体育资讯，内涵段子、福利美图、养生知识、财经，科技前沿等等。它通过智能计算用户的兴趣，让您更加享受阅读的乐趣，畅享高效的阅读平台"
         }
       ],
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
@@ -79,6 +86,12 @@ export default {
   }
 };
 </script>
+
+<style>
+.van-nav-bar__title{
+  color: #999;
+}
+</style>
 
 
 <style lang="scss" scoped>
