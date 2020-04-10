@@ -1,4 +1,5 @@
 
+const absbygoogle = '(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-6538951207768377",enable_page_level_ads:true});';
 module.exports = {
   mode: 'universal',
   /*
@@ -13,7 +14,15 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    ],
+    script: [
+      // 这里引入谷歌广告的JS文件，async要为true
+      {src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', async: 'true'},
+      // 把上面的JS代码变量引用到这里
+      {innerHTML: absbygoogle, type: 'text/javascript', charset: 'utf-8'}
+    ],
+    // 禁止对JS转义，这一句一定要加上
+    __dangerouslyDisableSanitizers: ['script']
   },
   /*
   ** Customize the progress-bar color
@@ -26,9 +35,17 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['~/plugins/vant.js', {
-    src: '~plugins/custom/rootFontSize.js', ssr: false
-  }],
+  plugins: [
+    '~/plugins/vant.js',
+    {
+      src: '~plugins/custom/rootFontSize.js',
+      ssr: false
+    },
+    {
+      src: '~/plugins/googleAds.js',
+      ssr: false
+    }
+  ],
   /*
   ** Nuxt.js dev-modules
   */
