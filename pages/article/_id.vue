@@ -286,7 +286,6 @@ export default {
   color: #999;
 }
 .content {
-  font-family: sofia-pro, sans-serif;
   font-size: 19px;
   /* line-height: 27px; */
   letter-spacing: -0.5px;
@@ -352,7 +351,6 @@ export default {
     margin-top: 46px;
     padding: 4px 24px 10px 24px;
     .title {
-      font-family: sofia-pro, sans-serif;
       font-size: 32px;
       line-height: 46px;
       margin: 0;
@@ -473,7 +471,6 @@ export default {
       font-size: 18px;
       color: #444;
       font-weight: 600;
-      font-family: sofia-pro, sans-serif;
     }
     .card-content-footer {
       display: flex;

@@ -1,4 +1,19 @@
-﻿User-agent:*
-Disallow:
-
-Sitemap:http://ddnews.top/sitemap.xml
+﻿User-agent: Baiduspider
+Disallow: /
+User-agent: sogou spider
+Disallow: /
+User-agent: 360Spider
+Disallow: /
+User-agent: YisouSpider
+Disallow: /
+User-agent: Bingbot
+Disallow: /
+User-agent: Sosospider
+Disallow: /
+User-agent: *
+Disallow: 
+Disallow: /admin/
+Sitemap: http://www.ddnews.top/sitemap1.xml
+Sitemap: http://www.ddnews.top/sitemap2.xml
+Sitemap: http://www.ddnews.top/sitemap3.xml
+Sitemap: http://www.ddnews.top/sitemap4.xml

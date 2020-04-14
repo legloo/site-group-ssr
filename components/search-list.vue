@@ -94,7 +94,6 @@ export default {
       font-size: 18px;
       color: #444;
       font-weight: 600;
-      font-family: sofia-pro, sans-serif;
     }
     .card-content-footer {
       display: flex;
