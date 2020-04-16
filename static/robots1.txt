@@ -13,5 +13,7 @@ Disallow: /
 User-agent: *
 Disallow: 
 Disallow: /admin/
-
-Sitemap:http://www.ddnews.top/sitemap.xml
+Sitemap: http://www.ddnews.top/sitemap1.xml
+Sitemap: http://www.ddnews.top/sitemap2.xml
+Sitemap: http://www.ddnews.top/sitemap3.xml
+Sitemap: http://www.ddnews.top/sitemap4.xml
