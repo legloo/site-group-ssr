@@ -1,8 +1,18 @@
 <template>
-  <div class="container">
+  <div class="container" @click="popShow = false">
     <van-nav-bar title="天天头条" :fixed="true">
-      <template #right>
-        <van-icon name="search" @click="searchShow = !searchShow" />
+      <template #right id="popShow">
+        <van-icon name="search" @click.stop="searchShow = !searchShow" />
+      </template>
+      <template #left>
+        <van-icon name="apps-o" @click.stop="popShow = !popShow" />
+        <div class="navbar-links" v-show="popShow">
+          <ul>
+            <li v-for="(item) in tabs" :key="'links'+item.id">
+              <nuxt-link :to="{path:`/${item.id}`}">{{item.name}}</nuxt-link>
+            </li>
+          </ul>
+        </div>
       </template>
     </van-nav-bar>
     <van-search
@@ -16,10 +26,24 @@
         <van-icon name="search" @click="search" />
       </template>
     </van-search>
+
     <div class="main" :class="{'main-searchShow':searchShow}">
+      <van-tabs
+        :line-width="'0'"
+        :border="false"
+        :title-inactive-color="'#a2a0a0'"
+        :line-height="'1px'"
+        :ellipsis="false"
+      >
+        <van-tab v-for="(item) in tabs" :key="'tabs'+item.id" :name="item.name">
+          <template #title>
+            <nuxt-link :to="{path:`/${item.type}`}">{{item.name}}</nuxt-link>
+          </template>
+        </van-tab>
+      </van-tabs>
       <van-swipe class="banner" :autoplay="5000" indicator-color="#eee">
         <van-swipe-item v-for="(image, index) in images" :key="index">
-          <nuxt-link :to="{path:`/article/${image.articleId}`}">
+          <nuxt-link :to="{path:`/${image.type}/${image.articleId}`}">
             <div class="banner-content">
               <img :src="image.headImgUrl" :alt="image.headImgDesc" />
               <!-- <img v-lazy="image.src" :alt="image.alt" /> -->
@@ -28,17 +52,42 @@
           </nuxt-link>
         </van-swipe-item>
       </van-swipe>
-      <van-tabs
-        v-model="activeName"
-        :border="false"
-        :title-inactive-color="'#a2a0a0'"
-        :line-height="'1px'"
-        :ellipsis="false"
-      >
-        <van-tab v-for="(item) in tabs" :key="'tabs'+item.id" :title="item.name" :name="item.name">
-          <homeList :tabtype="item.id" />
-        </van-tab>
-      </van-tabs>
+
+      <ul class="article-list">
+        <nuxt-link
+          v-for="(item,key) in f_list"
+          :key="key"
+          :to="{path:`/${item.type}/${item.articleId}`}"
+        >
+          <div class="card-item">
+            <img :src="item.headImgUrl" :alt="item.headImgDesc" />
+            <div class="card-content">
+              <h2>{{item.title}}</h2>
+              <p class="card-content-footer">
+                <span>{{item.gmtCreated}}</span>
+                <span>{{item.source}}</span>
+              </p>
+            </div>
+          </div>
+        </nuxt-link>
+      </ul>
+      <div class="pre-next">
+        <div class="left">
+          <button v-show="page !== 0">上一页</button>
+        </div>
+        <div class="right">
+          <button v-show="f_list.length === size" @click="pageNext">下一页</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span style="font-family:arial;">Copyright &copy;2020</span>
+      <span @click="mailClick">
+        <a href="mailto:wangxiaoqi009@Gmail.com">/DMCA</a>
+      </span>
+      <span @click="mailClick">
+        <a href="mailto:wangxiaoqi009@Gmail.com">/联系我们</a>
+      </span>
     </div>
   </div>
 </template>
@@ -85,22 +134,67 @@ export default {
     ]);
     return {
       images: banner_data.data.data,
-      tabs: tabs_data.data.data,
-      activeName: tabs_data.data.data[0].name
+      tabs: tabs_data.data.data
     };
   },
-  mounted() {},
+  mounted() {
+    window.addEventListener("scroll", this.scrollToTop);
+  },
+  created() {
+    this.getList();
+  },
   methods: {
+    async pageNext() {
+      await this.getList();
+      this.page++;
+      this.backTop();
+    },
+    async getList() {
+      let res = await this.$axios.get(
+        `/api/article/front/search/${this.page}/${this.size}`
+      );
+      this.f_list = res.data.data.contents;
+    },
+    destroyed() {
+      window.removeEventListener("scroll", this.scrollToTop);
+    },
     search() {
       this.$router.push(`/search-result?wd=${this.searchValue}`);
+    },
+    mailClick() {
+      console.log(1);
+    },
+    backTop() {
+      const that = this;
+      let timer = setInterval(() => {
+        let ispeed = Math.floor(-that.scrollTop / 5);
+        document.documentElement.scrollTop = document.body.scrollTop =
+          that.scrollTop + ispeed;
+        if (that.scrollTop === 0) {
+          clearInterval(timer);
+        }
+      }, 16);
+    },
+    scrollToTop() {
+      const that = this;
+      let scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      that.scrollTop = scrollTop;
+      // getl
     }
-    // getl
   },
   data() {
     return {
-      list: [],
+      scrollTop: 0,
+      page: 0,
+      size: 5,
+      f_list: [],
+      tabtype: this.activeName,
       searchShow: false,
-      searchValue: ""
+      searchValue: "",
+      popShow: false
       // images:
     };
   }
@@ -108,8 +202,8 @@ export default {
 </script>
 
 <style>
-.van-nav-bar__title{
-  color: #999;
+.van-nav-bar__title {
+  color: #fff;
 }
 </style>
 
@@ -120,6 +214,72 @@ export default {
   // width: px2rem(375);
   max-width: 500px;
   margin: auto;
+  .footer {
+    font-size: 13px;
+    padding: 20px 13px;
+  }
+  .pre-next {
+    display: flex;
+    .left {
+      flex: 0 0 50%;
+      text-align: left;
+      font-size: 16px;
+    }
+    .right {
+      flex: 0 0 50%;
+      text-align: right;
+      font-size: 16px;
+    }
+    button {
+      border: 1px solid #eee;
+      background-color: #fff;
+      // padding-top: px2rem(5);
+      // padding-left: px2rem(50);
+      // padding-right: px2rem(50);
+      // padding-bottom: px2rem(5);
+      width: 83%;
+      height: 40px;
+      color: #969696;
+      border-radius: 5px;
+    }
+  }
+  .article-list {
+    margin-top: 20px;
+  }
+  .card-item {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    box-shadow: 0px 2px 15px -9px #7b7979;
+    margin-bottom: 22px;
+    overflow: hidden;
+    img {
+      font-size: 12px;
+      width: 100%;
+      display: block;
+    }
+    .card-content {
+      border-top: 1px solid #eee;
+      padding: 10px;
+      h2 {
+        font-size: 18px;
+        color: #444;
+        font-weight: 600;
+      }
+      .card-content-footer {
+        display: flex;
+        font-size: 12px;
+        justify-content: space-between;
+        margin-top: 11px;
+        span {
+          color: #aaa;
+          background-color: #f5f5f5;
+          border: 1px solid #f5f5f5;
+          padding: 2px 5px 3px 5px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
   .van-search {
     padding: 0 13px;
     background-color: transparent;
@@ -137,7 +297,7 @@ export default {
   }
   .main {
     margin-top: 46px;
-    padding: 10px 13px 13px 13px;
+    padding: 0px 13px 13px 13px;
   }
   .main-searchShow {
     margin-top: 88px;
@@ -149,14 +309,32 @@ export default {
   .van-nav-bar {
     background-color: #161515;
     .van-nav-bar__title {
-      color: #999;
+      color: #fff;
     }
-    .van-nav-bar__right {
-      font-size: 17px;
-      .van-icon-search {
-        color: #fff;
+    .navbar-links {
+      position: absolute;
+      width: 84px;
+      background-color: rgba(255, 255, 255, 0.9);
+      top: 45px;
+      border-radius: 5px;
+      height: 300px;
+      overflow-y: scroll;
+      line-height: 38px;
+      a {
+        color: #000;
       }
     }
+    .van-icon {
+      color: #fff;
+      vertical-align: middle;
+      font-size: 20px;
+    }
+    // .van-nav-bar__right {
+    //   font-size: 17px;
+    //   .van-icon-search {
+    //     color: #fff;
+    //   }
+    // }
   }
   .banner {
     height: 200px;
@@ -189,9 +367,12 @@ export default {
     }
   }
   .van-tabs {
-    /deep/ .van-tabs__line {
-      bottom: 21px;
-      z-index: 0;
+    margin-bottom: 10px;
+    /deep/ .van-tab__text a {
+      color: #6d6c6c;
+    }
+    /deep/ .van-tab--active {
+      font-weight: unset;
     }
   }
 }

@@ -61,38 +61,4 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/sass/resources.scss";
 
-.card-item {
-  border: 1px solid #eee;
-  border-radius: 5px;
-  box-shadow: 0px 2px 15px -9px #7b7979;
-  margin-bottom: 22px;
-  overflow: hidden;
-  img {
-    font-size: 12px;
-    width: 100%;
-    display: block;
-  }
-  .card-content {
-    border-top: 1px solid #eee;
-    padding: 10px;
-    h2 {
-      font-size: 18px;
-      color: #444;
-      font-weight: 600;
-    }
-    .card-content-footer {
-      display: flex;
-      font-size: 12px;
-      justify-content: space-between;
-      margin-top: 11px;
-      span {
-        color: #aaa;
-        background-color: #f5f5f5;
-        border: 1px solid #f5f5f5;
-        padding: 2px 5px 3px 5px;
-        border-radius: 4px;
-      }
-    }
-  }
-}
 </style>

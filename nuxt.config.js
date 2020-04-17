@@ -40,10 +40,6 @@ module.exports = {
     {
       src: '~plugins/custom/rootFontSize.js',
       ssr: false
-    },
-    {
-      src: '~/plugins/googleAds.js',
-      ssr: false
     }
   ],
   /*
@@ -79,7 +75,7 @@ module.exports = {
   },
   proxy: {
     '/apis': {
-      target: 'http://3027nq6031.qicp.vip', // 目标接口域名
+      target: 'http://www.ddnews.top/apis/', // 目标接口域名
       changeOrigin: true, // 表示是否跨域
       pathRewrite: {
         '^/apis': '', // 把 /api 替换成‘’
