@@ -9,7 +9,7 @@
         <div class="navbar-links" v-show="popShow">
           <ul>
             <li v-for="(item) in tabs" :key="'links'+item.id">
-              <nuxt-link :to="{path:`/${item.id}`}">{{item.name}}</nuxt-link>
+              <nuxt-link :to="{path:`/${item.code}`}">{{item.name}}</nuxt-link>
             </li>
           </ul>
         </div>
@@ -37,13 +37,13 @@
       >
         <van-tab v-for="(item) in tabs" :key="'tabs'+item.id" :name="item.name">
           <template #title>
-            <nuxt-link :to="{path:`/${item.type}`}">{{item.name}}</nuxt-link>
+            <nuxt-link :to="{path:`/${item.code}`}">{{item.name}}</nuxt-link>
           </template>
         </van-tab>
       </van-tabs>
       <van-swipe class="banner" :autoplay="5000" indicator-color="#eee">
         <van-swipe-item v-for="(image, index) in images" :key="index">
-          <nuxt-link :to="{path:`/${image.type}/${image.articleId}`}">
+          <nuxt-link :to="{path:`/${image.typeCode}/${image.articleId}`}">
             <div class="banner-content">
               <img :src="image.headImgUrl" :alt="image.headImgDesc" />
               <!-- <img v-lazy="image.src" :alt="image.alt" /> -->
@@ -57,7 +57,7 @@
         <nuxt-link
           v-for="(item,key) in f_list"
           :key="key"
-          :to="{path:`/${item.type}/${item.articleId}`}"
+          :to="{path:`/${item.typeCode}/${item.articleId}`}"
         >
           <div class="card-item">
             <img :src="item.headImgUrl" :alt="item.headImgDesc" />
@@ -73,7 +73,7 @@
       </ul>
       <div class="pre-next">
         <div class="left">
-          <button v-show="page !== 0">上一页</button>
+          <button v-show="page !== 0" @click="pagebe">上一页</button>
         </div>
         <div class="right">
           <button v-show="f_list.length === size" @click="pageNext">下一页</button>
@@ -127,7 +127,7 @@ export default {
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
     };
   },
-  async asyncData(context) {
+  async asyncData() {
     let [banner_data, tabs_data] = await Promise.all([
       axios.get("/apis/api/article/front/recommend"),
       axios.get("/apis/api/articleType/dict")
@@ -144,9 +144,14 @@ export default {
     this.getList();
   },
   methods: {
-    async pageNext() {
+    async pagebe() {
+      this.page--;
       await this.getList();
+      this.backTop();
+    },
+    async pageNext() {
       this.page++;
+      await this.getList();
       this.backTop();
     },
     async getList() {

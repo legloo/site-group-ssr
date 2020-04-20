@@ -140,7 +140,7 @@
         <div class="pre-container" :class="{'nopreornext':!neighbor_pre}">
           <nuxt-link
             v-if="neighbor_pre"
-            :to="{path:`/${neighbor_pre.type}/${neighbor_pre.articleId}`}"
+            :to="{path:`/${neighbor_pre.typeCode}/${neighbor_pre.articleId}`}"
             class="prev"
           >
             <van-icon name="arrow-left" @click="search" />Prev
@@ -149,7 +149,7 @@
         <div class="next-container" :class="{'nopreornext':!neighbor_next}">
           <nuxt-link
             v-if="neighbor_next"
-            :to="{path:`/${neighbor_pre.type}/${neighbor_next.articleId}`}"
+            :to="{path:`/${neighbor_pre.typeCode}/${neighbor_next.articleId}`}"
             class="next"
           >
             Next
@@ -163,7 +163,7 @@
       <nuxt-link
         v-for="(item,key) in relatelist"
         :key="key"
-        :to="{path:`/${item.type}/${item.articleId}`}"
+        :to="{path:`/${item.typeCode}/${item.articleId}`}"
       >
         <div class="card-item">
           <div class="card-image">
