@@ -51,10 +51,10 @@
       </ul>
       <div class="pre-next">
         <div class="left">
-          <button v-show="page !== 0" @click="pagebe">上一页</button>
+          <button v-show="page !== 0" @click="pagebe">Prev</button>
         </div>
         <div class="right">
-          <button v-show="f_list.length === size" @click="pageNext">下一页</button>
+          <button v-show="f_list.length === size" @click="pageNext">Next</button>
         </div>
       </div>
     </div>
@@ -97,12 +97,18 @@ export default {
     };
   },
   async asyncData({ params }) {
-    let [ tabs_data] = await Promise.all([
+    let [tabs_data] = await Promise.all([
       axios.get("/apis/api/articleType/dict")
     ]);
+  let tabs_U = tabs_data.data.data.unshift({
+      code: "",
+      id: "index",
+      name: "ALL",
+      showIdx: 1
+    })
     return {
       tabs: tabs_data.data.data,
-      activeName:params.type
+      activeName: params.type
     };
   },
   mounted() {
@@ -110,7 +116,7 @@ export default {
   },
   created() {
     this.typecode = this.$route.params.type;
-    let c_tab = this.tabs.filter(x => x.code === this.$route.params.type)[0]
+    let c_tab = this.tabs.filter(x => x.code === this.$route.params.type)[0];
     this.typecode = c_tab.id;
     this.getList();
   },
@@ -126,7 +132,6 @@ export default {
       this.backTop();
     },
     async getList() {
-        
       let res = await this.$axios.get(
         `/api/article/front/search/${this.page}/${this.size}?typeId=${this.typecode}`
       );
@@ -140,9 +145,6 @@ export default {
     },
     search() {
       this.$router.push(`/search-result?wd=${this.searchValue}`);
-    },
-    mailClick() {
-      console.log(1);
     },
     backTop() {
       const that = this;
@@ -171,11 +173,11 @@ export default {
       page: 0,
       size: 5,
       f_list: [],
-    //   activeName: '',
+      //   activeName: '',
       searchShow: false,
       searchValue: "",
       popShow: false,
-      typecode:''
+      typecode: ""
       // images:
     };
   }
@@ -212,7 +214,7 @@ export default {
       font-size: 16px;
     }
     button {
-      border: 1px solid #eee;
+      border: 1px solid #dad6d6;
       background-color: #fff;
       // padding-top: px2rem(5);
       // padding-left: px2rem(50);

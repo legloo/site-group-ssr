@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <van-nav-bar title="天天头条" left-arrow @click-left="onClickLeft" :fixed="true">
+    <van-nav-bar title="天天头条" :left-text="typename" left-arrow @click-left="onClickLeft" :fixed="true">
       <template #right>
         <van-icon name="search" @click="searchShow = !searchShow" />
       </template>
@@ -20,12 +20,8 @@
     <div class="main" :class="{'main-searchShow':searchShow}">
       <h1 class="title">{{article.title}}</h1>
       <div class="title-bottom">
-        <nuxt-link :to="{path:`/search-result?date=${article.gmtCreated}`}">
-          <span class="time">{{article.gmtCreated}}</span>
-        </nuxt-link>
-        <nuxt-link :to="{path:`/search-result?source=${this.article.source}`}">
-          <span class="source">{{article.source}}</span>
-        </nuxt-link>
+          <span class="time" @click="searchq(`date=${article.gmtCreated}`)">{{article.gmtCreated}}</span>
+          <span class="source" @click="searchq(`source=${article.source}`)">{{article.source}}</span>
       </div>
       <!-- <div class="head-img">
         <img :src="article.headImgUrl" :alt="article.headImgDesc" />
@@ -144,7 +140,7 @@
         <div class="pre-container" :class="{'nopreornext':!neighbor_pre}">
           <nuxt-link
             v-if="neighbor_pre"
-            :to="{path:`/article/${neighbor_pre.articleId}`}"
+            :to="{path:`/${neighbor_pre.typeCode}/${neighbor_pre.articleId}`}"
             class="prev"
           >
             <van-icon name="arrow-left" @click="search" />Prev
@@ -153,7 +149,7 @@
         <div class="next-container" :class="{'nopreornext':!neighbor_next}">
           <nuxt-link
             v-if="neighbor_next"
-            :to="{path:`/article/${neighbor_next.articleId}`}"
+            :to="{path:`/${neighbor_pre.typeCode}/${neighbor_next.articleId}`}"
             class="next"
           >
             Next
@@ -167,7 +163,7 @@
       <nuxt-link
         v-for="(item,key) in relatelist"
         :key="key"
-        :to="{path:`/article/${item.articleId}`}"
+        :to="{path:`/${item.typeCode}/${item.articleId}`}"
       >
         <div class="card-item">
           <div class="card-image">
@@ -224,7 +220,8 @@ export default {
       article: article.data.data,
       neighbor_pre: neighbor.data.data.pre ? neighbor.data.data.pre : null,
       neighbor_next: neighbor.data.data.next ? neighbor.data.data.next : null,
-      relatelist: relate.data.data
+      relatelist: relate.data.data,
+      typename:params.type
     };
   },
   watch: {},
@@ -234,6 +231,9 @@ export default {
     document.getElementsByClassName("container")[0].scrollTop = 0;
   },
   methods: {
+    searchq(path){
+      location.href =`${location.origin}/search-result?${path}`
+    },
     getShareHref(item) {
       let content = "";
       if (item === "facebook") {
@@ -351,7 +351,7 @@ export default {
     margin-top: 46px;
     padding: 4px 24px 10px 24px;
     .title {
-      font-size: 32px;
+      font-size: 31px;
       line-height: 46px;
       margin: 0;
       padding: 0;
@@ -363,7 +363,7 @@ export default {
       padding: 17px 0;
       display: flex;
       justify-content: space-between;
-      a {
+      span {
         font-size: 12px;
         letter-spacing: 0;
         color: #999;
@@ -438,6 +438,9 @@ export default {
   }
   .van-nav-bar {
     background-color: #161515;
+    .van-nav-bar__text{
+      color: #fff;
+    }
     .van-nav-bar__arrow {
       color: #fff;
       font-size: 16px;

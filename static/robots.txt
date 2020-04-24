@@ -1,4 +1,4 @@
-﻿User-agent: Baiduspider
+User-agent: Baiduspider
 Disallow: /
 User-agent: sogou spider
 Disallow: /

@@ -1,5 +1,6 @@
 
 const absbygoogle = '(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-6538951207768377",enable_page_level_ads:true});';
+const zzcn = `document.write(unescape("%3Cspan style='display:none;' id='cnzz_stat_icon_1278835007'%3E%3C/span%3E%3Cscript src='https://s9.cnzz.com/stat.php%3Fid%3D1278835007%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));`
 module.exports = {
   mode: 'universal',
   /*
@@ -19,7 +20,8 @@ module.exports = {
       // 这里引入谷歌广告的JS文件，async要为true
       {src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', async: 'true'},
       // 把上面的JS代码变量引用到这里
-      {innerHTML: absbygoogle, type: 'text/javascript', charset: 'utf-8'}
+      {innerHTML: absbygoogle, type: 'text/javascript', charset: 'utf-8'},
+      {innerHTML: zzcn, type: 'text/javascript',}
     ],
     // 禁止对JS转义，这一句一定要加上
     __dangerouslyDisableSanitizers: ['script']
@@ -75,7 +77,7 @@ module.exports = {
   },
   proxy: {
     '/apis': {
-      target: 'http://3027nq6031.qicp.vip/', // 目标接口域名
+      target: 'http://www.ddnews.top/apis/', // 目标接口域名
       changeOrigin: true, // 表示是否跨域
       pathRewrite: {
         '^/apis': '', // 把 /api 替换成‘’

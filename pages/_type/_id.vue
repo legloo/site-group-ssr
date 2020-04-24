@@ -216,7 +216,6 @@ export default {
       axios.get(`/apis/api/article/front/adjacent/${params.id}`),
       axios.get(`/apis/api/article/front/related/${params.id}`)
     ]);
-    console.log(neighbor);
     return {
       article: article.data.data,
       neighbor_pre: neighbor.data.data.pre ? neighbor.data.data.pre : null,

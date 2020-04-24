@@ -73,20 +73,20 @@
       </ul>
       <div class="pre-next">
         <div class="left">
-          <button v-show="page !== 0" @click="pagebe">上一页</button>
+          <button v-show="page !== 0" @click="pagebe">Prev</button>
         </div>
         <div class="right">
-          <button v-show="f_list.length === size" @click="pageNext">下一页</button>
+          <button v-show="f_list.length === size" @click="pageNext">Next</button>
         </div>
       </div>
     </div>
     <div class="footer">
       <span style="font-family:arial;">Copyright &copy;2020</span>
-      <span @click="mailClick">
-        <a href="mailto:wangxiaoqi009@Gmail.com">/DMCA</a>
+      <span @click="mailClick('DMCA')">
+        /&nbsp;DMCA
       </span>
-      <span @click="mailClick">
-        <a href="mailto:wangxiaoqi009@Gmail.com">/联系我们</a>
+      <span @click="mailClick('concatUs')">&nbsp;
+        /&nbsp;联系我们
       </span>
     </div>
   </div>
@@ -103,6 +103,7 @@ Vue.use(Lazyload);
 import homeList from "~/components/home-list.vue";
 
 export default {
+  // middleware:'ipCheck',
   components: {
     homeList
   },
@@ -166,8 +167,11 @@ export default {
     search() {
       this.$router.push(`/search-result?wd=${this.searchValue}`);
     },
-    mailClick() {
-      console.log(1);
+    async mailClick(type) {
+        if (confirm("确定要向wangxiaoqi009@Gmail.com" + "发送邮件么?") == true) {
+            parent.location.href = 'mailto:wangxiaoqi009@Gmail.com' + '?subject=' + type + '';
+        }
+      let res = await axios.post("/apis/api/event/mail/add");
     },
     backTop() {
       const that = this;
@@ -236,7 +240,7 @@ export default {
       font-size: 16px;
     }
     button {
-      border: 1px solid #eee;
+      border: 1px solid #dad6d6;
       background-color: #fff;
       // padding-top: px2rem(5);
       // padding-left: px2rem(50);
@@ -318,15 +322,17 @@ export default {
     }
     .navbar-links {
       position: absolute;
-      width: 84px;
-      background-color: rgba(255, 255, 255, 0.9);
+      /* width: 84px; */
+      background-color: rgba(68, 67, 67, 0.9);
       top: 45px;
       border-radius: 5px;
-      height: 300px;
+      height: 250px;
       overflow-y: scroll;
       line-height: 38px;
+      color: #fff;
+      padding: 10px;
       a {
-        color: #000;
+        color: #fff;
       }
     }
     .van-icon {

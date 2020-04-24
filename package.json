@@ -12,7 +12,8 @@
     "stop": "nuxt stop",
     "generate": "nuxt generate",
     "deploy": "scp -r  ./static/ ./.nuxt/ ./nuxt.config.js ./package.json root@47.99.242.104:/usr/local/software/nuxt",
-    "deploy-prod": "scp -P 22 -r  ./static/ ./.nuxt/ ./nuxt.config.js ./package.json root@161.117.176.88:/usr/local/software/nuxt/ssr"
+    "deploy-prod": "scp -P 22 -r  ./static/ ./.nuxt/ ./nuxt.config.js ./package.json root@161.117.176.88:/usr/local/software/nuxt/ssr",
+    "deploy-robot": "scp -P 22 -r  ./static/robots.txt root@161.117.176.88:/usr/local/software/nuxt/ssr/static"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -35,7 +36,7 @@
   "config": {
     "nuxt": {
       "host": "0.0.0.0",
-      "port": "80"
+      "port": "8080"
     }
   }
 }
