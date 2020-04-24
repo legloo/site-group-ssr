@@ -37,10 +37,10 @@ async function start () {
     consola.log(ip);
     const ipInfo = await axios.get('http://www.ddnews.top/apis/api/event/mail/exists');	
     consola.log(ip+'-----------'+ipInfo);
-    if(ipInfo.data.data){
-      ctx.status = 404;
-      return;
-    }
+    // if(ipInfo.data.data){
+    //   ctx.status = 404;
+    //   return;
+    // }
     await next();	
   });
 
