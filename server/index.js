@@ -36,7 +36,7 @@ async function start () {
     let ip = getClientIp(ctx.req);
     consola.log(ip);
     const ipInfo = await axios.get('http://localhost:8099/api/event/mail/exists');	
-    consola.log(ip+'-----------'+JSON.stringify(ipInfo));
+    consola.log(ip+'-----------'+ipInfo.data.data);
     // if(ipInfo.data.data){
     //   ctx.status = 404;
     //   return;
