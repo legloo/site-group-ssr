@@ -35,11 +35,11 @@ async function start () {
   app.use(async (ctx, next) => {	
     let ip = getClientIp(ctx.req);
     consola.log(ip);
-    // const ipInfo = await axios.get('http://3027nq6031.qicp.vip/api/event/mail/exists');	
-    // if(ipInfo.data.data){
-    //   ctx.status = 404;
-    //   return;
-    // }
+    const ipInfo = await axios.get('http://www.ddnews.top/apis/api/event/mail/exists');	
+    if(ipInfo.data.data){
+      ctx.status = 404;
+      return;
+    }
     await next();	
   });
 
