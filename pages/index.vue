@@ -82,10 +82,8 @@
     </div>
     <div class="footer">
       <span style="font-family:arial;">Copyright &copy;2020</span>
-      <span @click="mailClick('DMCA')">
-        /&nbsp;DMCA
-      </span>
-      <span @click="mailClick('concatUs')">&nbsp;
+      <span @click="mailClick('DMCA')">/&nbsp;DMCA</span>
+      <span @click="mailClick('concatUs')">
         /&nbsp;联系我们
       </span>
     </div>
@@ -168,9 +166,10 @@ export default {
       this.$router.push(`/search-result?wd=${this.searchValue}`);
     },
     async mailClick(type) {
-        if (confirm("确定要向wangxiaoqi009@Gmail.com" + "发送邮件么?") == true) {
-            parent.location.href = 'mailto:wangxiaoqi009@Gmail.com' + '?subject=' + type + '';
-        }
+      if (confirm("确定要向wangxiaoqi009@Gmail.com" + "发送邮件么?") == true) {
+        parent.location.href =
+          "mailto:wangxiaoqi009@Gmail.com" + "?subject=" + type + "";
+      }
       let res = await axios.post("/apis/api/event/mail/add");
     },
     backTop() {
@@ -322,7 +321,7 @@ export default {
     }
     .navbar-links {
       position: absolute;
-      /* width: 84px; */
+      word-break: keep-all;
       background-color: rgba(68, 67, 67, 0.9);
       top: 45px;
       border-radius: 5px;
@@ -330,7 +329,7 @@ export default {
       overflow-y: scroll;
       line-height: 38px;
       color: #fff;
-      padding: 10px;
+      padding: 10px 26px;
       a {
         color: #fff;
       }
