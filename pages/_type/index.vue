@@ -1,8 +1,13 @@
 <template>
   <div class="container" @click="popShow = false">
-    <van-nav-bar title="天天头条" :fixed="true" left-arrow @click-left="onClickLeft">
+    <van-nav-bar title="天天头条" :fixed="true">
       <template #right id="popShow">
         <van-icon name="search" @click.stop="searchShow = !searchShow" />
+      </template>
+      <template #left>
+        <span class="navbar-left">
+           <nuxt-link :to="{path:`/`}">首页</nuxt-link>
+        </span>
       </template>
     </van-nav-bar>
     <van-search
@@ -227,7 +232,7 @@ export default {
     }
   }
   .article-list {
-    margin-top: 20px;
+    // margin-top: 20px;
   }
   .card-item {
     border: 1px solid #eee;
@@ -291,6 +296,12 @@ export default {
   }
   .van-nav-bar {
     background-color: #161515;
+    .navbar-left{
+      color: #fff;
+      a{
+        color: #fff;
+      }
+    }
     .van-nav-bar__title {
       color: #fff;
     }
