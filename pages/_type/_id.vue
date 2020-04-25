@@ -1,8 +1,15 @@
 <template>
   <div class="container">
-    <van-nav-bar title="天天头条" :left-text="typename" left-arrow @click-left="onClickLeft" :fixed="true">
+    <van-nav-bar title="天天头条"   :fixed="true">
       <template #right>
         <van-icon name="search" @click="searchShow = !searchShow" />
+      </template>
+      <template #left>
+        <span class="navbar-left">
+           <nuxt-link :to="{path:`/`}">首页</nuxt-link>
+           /
+           <nuxt-link :to="{path:`/${typecode}`}">{{typename}}</nuxt-link>
+        </span>
       </template>
     </van-nav-bar>
     <van-search
@@ -221,7 +228,8 @@ export default {
       neighbor_pre: neighbor.data.data.pre ? neighbor.data.data.pre : null,
       neighbor_next: neighbor.data.data.next ? neighbor.data.data.next : null,
       relatelist: relate.data.data,
-      typename:params.type
+      typename:article.data.data.type,
+      typecode:params.type
     };
   },
   watch: {},
@@ -283,7 +291,7 @@ export default {
 
 <style>
 .van-nav-bar__title{
-  color: #999;
+  color: #fff;
 }
 .content {
   font-size: 19px;
@@ -438,6 +446,12 @@ export default {
   }
   .van-nav-bar {
     background-color: #161515;
+    .navbar-left{
+      color: #fff;
+      a{
+        color: #fff;
+      }
+    }
     .van-nav-bar__text{
       color: #fff;
     }
@@ -446,10 +460,10 @@ export default {
       font-size: 16px;
     }
     .van-nav-bar__title {
-      color: #999;
+      color: #fff;
     }
     .van-nav-bar__right {
-      font-size: 17px;
+      font-size: 20px;
       .van-icon-search {
         color: #fff;
       }
