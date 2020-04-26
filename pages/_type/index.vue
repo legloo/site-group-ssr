@@ -176,7 +176,7 @@ export default {
     return {
       scrollTop: 0,
       page: 0,
-      size: 5,
+      size: 20,
       f_list: [],
       //   activeName: '',
       searchShow: false,
