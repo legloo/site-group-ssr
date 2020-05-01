@@ -140,7 +140,7 @@ export default {
       let res = await this.$axios.get(
         `/api/article/front/search/${this.page}/${this.size}?typeId=${this.typecode}`
       );
-      this.f_list = res.data.data.contents;
+      this.f_list = res.data.data;
     },
     onClickLeft() {
       this.$router.go(-1);

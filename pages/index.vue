@@ -157,7 +157,7 @@ export default {
       let res = await this.$axios.get(
         `/api/article/front/search/${this.page}/${this.size}`
       );
-      this.f_list = res.data.data.contents;
+      this.f_list = res.data.data;
     },
     destroyed() {
       window.removeEventListener("scroll", this.scrollToTop);
