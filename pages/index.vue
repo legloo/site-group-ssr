@@ -158,7 +158,6 @@ export default {
         `/api/article/front/search/${this.page}/${this.size}`
       );
       this.f_list = res.data.data;
-    console.log(this.f_list)
     },
     destroyed() {
       window.removeEventListener("scroll", this.scrollToTop);
