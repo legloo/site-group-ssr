@@ -56,7 +56,7 @@
       </ul>
       <div class="pre-next">
         <div class="left">
-          <button v-show="page !== 0" @click="pagebe">Prev</button>
+          <button v-show="page !== 1" @click="pagebe">Prev</button>
         </div>
         <div class="right">
           <button v-show="f_list.length === size" @click="pageNext">Next</button>
@@ -175,7 +175,7 @@ export default {
   data() {
     return {
       scrollTop: 0,
-      page: 0,
+      page: 1,
       size: 20,
       f_list: [],
       //   activeName: '',

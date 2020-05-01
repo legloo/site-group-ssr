@@ -78,6 +78,7 @@ module.exports = {
   proxy: {
     '/apis': {
       // target: 'http://www.ddnews.top/apis/', // 目标接口域名
+      // target: 'http://3027nq6031.qicp.vip/', // 目标接口域名
       target: 'http://161.117.176.88/apis/', // 目标接口域名
       changeOrigin: true, // 表示是否跨域
       pathRewrite: {
