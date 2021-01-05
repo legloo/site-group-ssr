@@ -16,7 +16,7 @@
     "deploy-robot": "scp -P 22 -r  ./static/robots.txt root@161.117.176.88:/usr/local/software/nuxt/ssr/static"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "cross-env": "^5.2.0",
     "koa": "^2.6.2",
     "nuxt": "^2.0.0",
